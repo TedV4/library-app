@@ -1,0 +1,1 @@
+The goal of this project is to create a library that stores and displays book data. The purpose of this exercise is to practice using objects in JavaScript.
