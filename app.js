@@ -18,28 +18,28 @@ let gridContainer = document.querySelector(".grid-container");
 
 //Append books to grid container
 function addBookToLibrary(book) {
-    let bookCard = document.createElement("div");
+  let bookCard = document.createElement("div");
 
-    let title = document.createElement("h1");
-    title.textContent = book.title;
+  let title = document.createElement("h1");
+  title.textContent = book.title;
 
-    let author = document.createElement("p");
-    author.textContent = book.author;
+  let author = document.createElement("p");
+  author.textContent = book.author;
 
-    let pages = document.createElement("p");
-    pages.textContent = `${book.pages} pages`;
+  let pages = document.createElement("p");
+  pages.textContent = `${book.pages} pages`;
 
-    let readingStatus = document.createElement("button");
+  let readingStatus = document.createElement("button");
 
-    //If the book was read, display complete, otherwise display incomplete
-    if (book.read === true) {
-      readingStatus.textContent = "Complete";
-    } else {
-      readingStatus.textContent = "Incomplete";
-    }
+  //If the book was read, display complete, otherwise display incomplete
+  if (book.read == true) {
+    readingStatus.textContent = "Complete";
+  } else {
+    readingStatus.textContent = "Incomplete";
+  }
 
-    bookCard.append(title, author, pages, readingStatus);
-    gridContainer.appendChild(bookCard);
+  bookCard.append(title, author, pages, readingStatus);
+  gridContainer.appendChild(bookCard);
 }
 
 //Get add-book-button
@@ -54,20 +54,16 @@ addBookBtn.addEventListener("click", function (event) {
   let title = document.getElementById("title").value;
   let author = document.getElementById("author").value;
   let pages = document.getElementById("pages").value;
-  let readingStatus = document.getElementById("reading-status-checkbox").value;
-  console.log(readingStatus)
-  
-  //Convert checkbox value to boolean
-  if (readingStatus == 'on') {
-    readingStatus = true;
-  } else (readingStatus = false);
+  let readingStatus = document.getElementById(
+    "reading-status-checkbox"
+  ).checked;
 
   //Validate against empty form values
   if (title !== "" && author !== "" && pages !== "") {
     let book = new Book(title, author, pages, readingStatus);
     library.push(book);
     addBookToLibrary(book);
+    //Clear form input fields
+    document.querySelector("form").reset();
   }
 });
-
-addBookToLibrary();
