@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #9ca3af;
+    background: rgb(223, 226, 230);
 }
 
 .main-content {
@@ -14,7 +14,6 @@ body {
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 1fr;
   color: #f8fafc;
-  background: rgba(236,239,243,0.8);
   height: 100vh;
 }
 
