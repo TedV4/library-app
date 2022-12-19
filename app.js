@@ -31,7 +31,7 @@ function addBookToLibrary() {
     pages.textContent = `${library[i].pages} pages`;
 
     let readingStatus = document.createElement("button");
-   
+
     //If the book was read, display complete, otherwise display incomplete
     if (library[i].read === true) {
       readingStatus.textContent = "Complete";
@@ -43,5 +43,33 @@ function addBookToLibrary() {
     gridContainer.appendChild(bookCard);
   }
 }
+
+//Get add-book-button
+let addBookBtn = document.querySelector(".submit-btn");
+
+//On click, get input values from form, then add book to library
+addBookBtn.addEventListener("click", function (event) {
+  //Prevent form submission for the sake of using our array as storage
+  event.preventDefault();
+
+  //Get form values
+  let title = document.getElementById("title").value;
+  let author = document.getElementById("author").value;
+  let pages = document.getElementById("pages").value;
+  let readingStatus = document.getElementById("reading-status-checkbox").value;
+  console.log(readingStatus)
+  
+  //Convert checkbox value to boolean
+  if (readingStatus == 'on') {
+    readingStatus = true;
+  } else (readingStatus = false);
+
+  //Validate against empty form values
+  if (title !== "" && author !== "" && pages !== "") {
+    let book = new Book(title, author, pages, readingStatus);
+    library.push(book);
+    addBookToLibrary();
+  }
+});
 
 addBookToLibrary();
