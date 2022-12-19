@@ -17,23 +17,22 @@ let library = [oil, annaK];
 let gridContainer = document.querySelector(".grid-container");
 
 //Append books to grid container
-function addBookToLibrary() {
-  for (let i = 0; i < library.length; i++) {
+function addBookToLibrary(book) {
     let bookCard = document.createElement("div");
 
     let title = document.createElement("h1");
-    title.textContent = library[i].title;
+    title.textContent = book.title;
 
     let author = document.createElement("p");
-    author.textContent = library[i].author;
+    author.textContent = book.author;
 
     let pages = document.createElement("p");
-    pages.textContent = `${library[i].pages} pages`;
+    pages.textContent = `${book.pages} pages`;
 
     let readingStatus = document.createElement("button");
 
     //If the book was read, display complete, otherwise display incomplete
-    if (library[i].read === true) {
+    if (book.read === true) {
       readingStatus.textContent = "Complete";
     } else {
       readingStatus.textContent = "Incomplete";
@@ -41,13 +40,12 @@ function addBookToLibrary() {
 
     bookCard.append(title, author, pages, readingStatus);
     gridContainer.appendChild(bookCard);
-  }
 }
 
 //Get add-book-button
 let addBookBtn = document.querySelector(".submit-btn");
 
-//On click, get input values from form, then add book to library
+//On click, add book to library
 addBookBtn.addEventListener("click", function (event) {
   //Prevent form submission for the sake of using our array as storage
   event.preventDefault();
@@ -68,7 +66,7 @@ addBookBtn.addEventListener("click", function (event) {
   if (title !== "" && author !== "" && pages !== "") {
     let book = new Book(title, author, pages, readingStatus);
     library.push(book);
-    addBookToLibrary();
+    addBookToLibrary(book);
   }
 });
 
