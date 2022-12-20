@@ -105,10 +105,13 @@ addBookBtn.addEventListener("click", function (event) {
 });
 
 //Example books for demonstration
-let jPark = new Book("Jurassic Park", "Michael Crichton", 448, true, 0);
-let oil = new Book("Oil!", "Upton Sinclair", 548, true, 0);
-let annaK = new Book("Anna Karenina", "Leo Tolstoy", 864, false, 0);
+let jPark = new Book("Jurassic Park", "Michael Crichton", 448, true, 1);
+let oil = new Book("Oil!", "Upton Sinclair", 548, true, 2);
+let annaK = new Book("Anna Karenina", "Leo Tolstoy", 864, false, 3);
 
+library.push(jPark);
 addBookToLibrary(jPark);
+library.push(oil);
 addBookToLibrary(oil);
+library.push(annaK);
 addBookToLibrary(annaK);
