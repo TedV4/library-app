@@ -31,13 +31,32 @@ function addBookToLibrary(book) {
 
   let readingStatus = document.createElement("button");
 
-  //If the book was read, display complete, otherwise display incomplete
-  if (book.read == true) {
-    readingStatus.textContent = "Complete";
-  } else {
-    readingStatus.textContent = "Incomplete";
+
+  //If the book was read, display 'complete' styling, otherwise display 'incomplete'
+  function toggleReadingStatusStyle() {
+    if (book.read == true) {
+      readingStatus.textContent = "Complete";
+      readingStatus.classList.remove('incomplete');
+      readingStatus.classList.add('complete');
+    } else {
+      readingStatus.textContent = "Incomplete";
+      readingStatus.classList.remove('complete');
+      readingStatus.classList.add('incomplete');
+    }
   }
 
+  //On click, change a books reading status and toggle its style
+  readingStatus.addEventListener('click', function(){
+    if (book.read == true) {
+      book.read = false;
+      toggleReadingStatusStyle();
+    } else if (book.read == false) {
+      book.read = true;
+      toggleReadingStatusStyle();
+    }
+  })
+
+  toggleReadingStatusStyle();
   bookCard.append(title, author, pages, readingStatus);
   gridContainer.appendChild(bookCard);
 }
