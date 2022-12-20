@@ -7,10 +7,6 @@ function Book(title, author, pages, read, index) {
   this.index = index;
 }
 
-//Example books
-let oil = new Book("Oil!", "Upton Sinclair", 548, true);
-let annaK = new Book("Anna Karenina", "Leo Tolstoy", 864, false);
-
 //Store books here
 let library = [];
 
@@ -31,7 +27,7 @@ function addBookToLibrary(book) {
   pages.textContent = `${book.pages} pages`;
 
   let readingStatus = document.createElement("button");
-  readingStatus.title = 'Update status';
+  readingStatus.title = "Update status";
 
   //If the book was read, display 'complete' styling, otherwise display 'incomplete'
   function toggleReadingStatusStyle() {
@@ -60,8 +56,8 @@ function addBookToLibrary(book) {
   //Add book removal button
   let removeBookBtn = document.createElement("button");
   removeBookBtn.textContent = "X";
-  removeBookBtn.title = 'Delete';
-  removeBookBtn.classList.add('delete-btn');
+  removeBookBtn.title = "Delete";
+  removeBookBtn.classList.add("delete-btn");
   //This will be compared to a books index value, so that only one book will be deleted at a time
   removeBookBtn.id = library.length;
 
@@ -107,3 +103,12 @@ addBookBtn.addEventListener("click", function (event) {
     document.querySelector("form").reset();
   }
 });
+
+//Example books for demonstration
+let jPark = new Book("Jurassic Park", "Michael Crichton", 448, true, 0);
+let oil = new Book("Oil!", "Upton Sinclair", 548, true, 0);
+let annaK = new Book("Anna Karenina", "Leo Tolstoy", 864, false, 0);
+
+addBookToLibrary(jPark);
+addBookToLibrary(oil);
+addBookToLibrary(annaK);
