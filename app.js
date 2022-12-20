@@ -1,9 +1,10 @@
 //Book constructor
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, index) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.index = index;
 }
 
 //Example books
@@ -11,7 +12,7 @@ let oil = new Book("Oil!", "Upton Sinclair", 548, true);
 let annaK = new Book("Anna Karenina", "Leo Tolstoy", 864, false);
 
 //Store books here
-let library = [oil, annaK];
+let library = [];
 
 //Get grid container
 let gridContainer = document.querySelector(".grid-container");
@@ -30,23 +31,23 @@ function addBookToLibrary(book) {
   pages.textContent = `${book.pages} pages`;
 
   let readingStatus = document.createElement("button");
-
+  readingStatus.title = 'Update status';
 
   //If the book was read, display 'complete' styling, otherwise display 'incomplete'
   function toggleReadingStatusStyle() {
     if (book.read == true) {
       readingStatus.textContent = "Complete";
-      readingStatus.classList.remove('incomplete');
-      readingStatus.classList.add('complete');
+      readingStatus.classList.remove("incomplete");
+      readingStatus.classList.add("complete");
     } else {
       readingStatus.textContent = "Incomplete";
-      readingStatus.classList.remove('complete');
-      readingStatus.classList.add('incomplete');
+      readingStatus.classList.remove("complete");
+      readingStatus.classList.add("incomplete");
     }
   }
 
   //On click, change a books reading status and toggle its style
-  readingStatus.addEventListener('click', function(){
+  readingStatus.addEventListener("click", function () {
     if (book.read == true) {
       book.read = false;
       toggleReadingStatusStyle();
@@ -54,10 +55,27 @@ function addBookToLibrary(book) {
       book.read = true;
       toggleReadingStatusStyle();
     }
-  })
+  });
+
+  //Add book removal button
+  let removeBookBtn = document.createElement("button");
+  removeBookBtn.textContent = "X";
+  removeBookBtn.title = 'Delete';
+  removeBookBtn.classList.add('delete-btn');
+  //This will be compared to a books index value, so that only one book will be deleted at a time
+  removeBookBtn.id = library.length;
+
+  removeBookBtn.addEventListener("click", function () {
+    if (book.index == removeBookBtn.id) {
+      //Removes the book from the library
+      library.splice(library[book.index], 1);
+      //Removes the book from the dom
+      removeBookBtn.parentElement.remove();
+    }
+  });
 
   toggleReadingStatusStyle();
-  bookCard.append(title, author, pages, readingStatus);
+  bookCard.append(title, author, pages, readingStatus, removeBookBtn);
   gridContainer.appendChild(bookCard);
 }
 
@@ -77,9 +95,12 @@ addBookBtn.addEventListener("click", function (event) {
     "reading-status-checkbox"
   ).checked;
 
+  //Give the book an index value, will be used to remove a specific book from the library
+  let index = library.length + 1;
+
   //Validate against empty form values
   if (title !== "" && author !== "" && pages !== "") {
-    let book = new Book(title, author, pages, readingStatus);
+    let book = new Book(title, author, pages, readingStatus, index);
     library.push(book);
     addBookToLibrary(book);
     //Clear form input fields
