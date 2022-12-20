@@ -110,4 +110,14 @@ form {
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+.complete {
+  background: #49965b;
+}
+
+.incomplete {
+  background: goldenrod
 }
